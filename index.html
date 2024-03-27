@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="style.css" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+
+    <title>Results summary component</title>
+  </head>
+  <body>
+    <div class="container">
+    <main>
+      <section class="result">
+        <h1>Your Result</h1>
+        <div class="resultScore">
+          <p><span class="whiteText">76</span>of 100</p>
+        </div>
+        <h2 class="whiteText">Great</h2>
+        <p>
+          You scored higher than 65% of the people who have taken these tests.
+        </p>
+      </section>
+      <section class="summary">
+        <h1>Summary</h1>
+        <ul id="stats-el"></ul>
+        <button type="submit">Continue</button>
+      </section>
+    </main>
+    <script>
+      const stats=document.getElementById('stats-el');
+      fetch('data.json')
+      .then(response=>response.json())
+      .then(data=>{
+        for(let c=0; c<data.length ; c++)
+        stats.innerHTML+=`
+        <li>
+          <p class="scoreCato">
+            <img src="${data[c].icon}" alt="icon">
+            ${data[c].category}
+          </p>
+          <p class="score">
+            <span>${data[c].score}  </span> /  100
+          </p>
+        </li>`;
+      })
+      .catch(error=>console.log(error));
+    </script>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Zainab Azeem</a>.
+    </div>
+  </div>
+  </body>
+</html>
